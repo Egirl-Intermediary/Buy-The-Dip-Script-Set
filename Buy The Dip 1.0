@@ -1,0 +1,14 @@
+declare lower;
+
+input length = 22;
+input meter = yes;
+
+# Plot indicator
+def value = ((high - Lowest(close[1], length)) / Lowest(close[1], length)) * 100;
+plot buythedip = value;
+plot Zeroline = 0;
+
+buythedip.AssignValueColor(color.green);
+Zeroline.AssignValueColor(color.white);
+
+AddLabel(meter and yes, Concat("Meter = ", buythedip), color.orange);
