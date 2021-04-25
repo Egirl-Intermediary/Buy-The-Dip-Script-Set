@@ -1,0 +1,38 @@
+# Meter 1
+def aggregationPeriod1 = AggregationPeriod.WEEK;
+def high1 = high(period = aggregationPeriod1);
+def close1 = close(period = aggregationPeriod1);
+
+# Meter 2
+def aggregationPeriod2 = AggregationPeriod.DAY;
+def high2 = high(period = aggregationPeriod2);
+def close2 = close(period = aggregationPeriod2);
+
+# Meter 3
+def aggregationPeriod3 = AggregationPeriod.Four_HOURS;
+def high3 = high(period = aggregationPeriod3);
+def close3 = close(period = aggregationPeriod3);
+
+# Meter 4
+def aggregationPeriod4 = AggregationPeriod.TWO_HOURS;
+def high4 = high(period = aggregationPeriod4);
+def close4 = close(period = aggregationPeriod4);
+
+# Meter 5
+def aggregationPeriod5 = AggregationPeriod.HOUR;
+def high5 = high(period = aggregationPeriod5);
+def close5 = close(period = aggregationPeriod5);
+
+input length = 22;
+
+def value1 = ((high1 - Lowest(close1[1], length)) / Lowest(close1[1], length)) * 100;
+def value2 = ((high2 - Lowest(close2[1], length)) / Lowest(close2[1], length)) * 100;
+def value3 = ((high3 - Lowest(close3[1], length)) / Lowest(close3[1], length)) * 100;
+def value4 = ((high4 - Lowest(close4[1], length)) / Lowest(close4[1], length)) * 100;
+def value5 = ((high5 - Lowest(close5[1], length)) / Lowest(close5[1], length)) * 100;
+
+AddLabel(yes, Concat("Week = ", value1), color.orange);
+AddLabel(yes, Concat("Day = ", value2), color.orange);
+AddLabel(yes, Concat("4HR = ", value3), color.orange);
+AddLabel(yes, Concat("2HR = ", value4), color.orange);
+AddLabel(yes, Concat("1HR = ", value5), color.orange);
