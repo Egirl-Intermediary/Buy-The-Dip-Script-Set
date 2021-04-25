@@ -1,0 +1,28 @@
+declare lower;
+
+input length = 22;
+input meter = yes;
+input arrows = yes;
+input color_change = yes;
+input paintbar = no;
+
+# Plot indicator
+def value = ((high - Lowest(close[1], length)) / Lowest(close[1], length)) * 100;
+plot buythedip = value;
+plot Zeroline = 0;
+def condition = buythedip crosses below Zeroline;
+
+buythedip.AssignValueColor(if color_change and buythedip < Zeroline then color.red else color.green);
+Zeroline.AssignValueColor(color.white);
+
+AddLabel(meter and yes, Concat("Meter = ", buythedip), color.orange);
+
+# Plot arrows
+plot UpSignal = if arrows and condition then 0 else Double.NaN;
+UpSignal.SetDefaultColor(Color.Orange);
+UpSignal.SetPaintingStrategy(PaintingStrategy.ARROW_UP);
+
+# Alert
+Alert(condition, "Buy the Dip", Alert.Bar, Sound.Chimes);
+
+AssignPriceColor(if paintbar and condition then color.orange else color.current);
