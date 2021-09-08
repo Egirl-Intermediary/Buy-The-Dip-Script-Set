@@ -1,5 +1,0 @@
-input length = 22;
-
-# Plot indicator
-def buythedip = ((high - Lowest(close[1], length)) / Lowest(close[1], length)) * 100;
-plot value = buythedip;
